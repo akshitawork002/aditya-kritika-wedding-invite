@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Wedding Invitation | Aditya & Kritika</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- GSAP Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 3D SYMMETRICAL 4-FOLD OUTWARD UNFOLDING ENVELOPE (sealbg.jpg) -->
+    <div id="envelope-overlay">
+        <div class="envelope-flap flap-top"></div>
+        <div class="envelope-flap flap-bottom"></div>
+        <div class="envelope-flap flap-left"></div>
+        <div class="envelope-flap flap-right"></div>
+        <div class="wax-seal" id="open-seal" title="Tap to Open Invitation">
+            <span class="seal-symbol">ॐ</span>
+            <span class="seal-text">TAP TO ENTER</span>
+        </div>
+    </div>
+
+    <!-- Interactive Stardust & Smooth Shimmer Touch Canvas -->
+    <canvas id="stardust-canvas"></canvas>
+
+    <!-- Background Audio -->
+    <audio id="bg-audio" loop>
+        <source src="audio.m4a" type="audio/mp4">
+    </audio>
+
+
+    <div class="invitation-container">
+
+        <!-- HERO WELCOME SECTION (arch-bg.jpg) -->
+        <section class="hero-section">
+            <div class="hero-text-wrapper">
+                <p class="hero-gratitude">WITH HEARTS FULL OF GRATITUDE</p>
+                <div class="hero-names-stack">
+                    <h1 class="couple-name-line">Aditya</h1>
+                    <span class="couple-ampersand">&amp;</span>
+                    <h1 class="couple-name-line">Kritika</h1>
+                </div>
+                <p class="hero-invite-sub">Cordially invite you to celebrate<br>the joyous union at their</p>
+                <div class="hero-gold-separator">
+                    <span class="separator-dot"></span>
+                </div>
+                <h2 class="hero-event-title">WEDDING CELEBRATION</h2>
+                <div class="hero-gold-separator">
+                    <span class="separator-dot"></span>
+                </div>
+                <p class="hero-datetime">DECEMBER 31, 2026 &amp; JANUARY 1, 2027<br>NAGPUR</p>
+            </div>
+            <div class="scroll-indicator-wrapper">
+                <div class="scroll-indicator" id="scroll-prompt">
+                    <span>SCROLL TO CELEBRATE ∨</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="gold-shimmer-divider"></div>
+
+        
+        <!-- COUPLE STORY SECTION (bg8.jpg) -->
+        <section class="content-section story-bg">
+            <h2 class="section-title shimmer-text" style="text-align: left;">&emsp;&emsp;Two Hearts,</h2>
+            <h2 class="section-title shimmer-text" style="text-align: right;">One Rhythm&emsp;&emsp;</h2>
+            <div class="gold-divider"></div>
+            
+            <!-- Couple Photo with Aesthetic Classy Border -->
+            <div class="story-couple-photo-frame">
+                <img src="couple.jpeg" alt="Aditya & Kritika">
+            </div>
+
+            <p class="story-prose">
+                Two souls, perfectly in sync, found their way to each other through laughter, light, and shared dreams. Now, we’re embarking on our greatest adventure yet, and our joy is incomplete without your gracious presence.
+            </p>
+        </section>
+
+        <div class="gold-shimmer-divider"></div>
+
+        <!-- BRIDE & GROOM PROFILES SECTION (bg13.jpg) - Soft-Edged Rectangular Frames -->
+        <section class="content-section vibrant-couple-bg">
+            <h2 class="section-title shimmer-text">The Bride &amp; Groom</h2>
+            <div class="profiles-vertical-stack">
+                
+                <!-- Bride -->
+                <div class="profile-card-vertical">
+                    <div class="profile-img-frame-shimmer">
+                        <img src="bride (2).jpeg" alt="Kritika">
+                    </div>
+                    <p class="role-badge">T H E &nbsp; B R I D E</p>
+                    <h3 class="profile-name">Kritika</h3>
+                    <div class="info-frost-card">
+                        <p class="parent-prefix">Daughter of:</p>
+                        <p class="parent-names">Mrs. Vidhya &amp;<br> Mr. Kailash Jhadav</p>
+                    </div>
+                </div>
+
+                <!-- Groom -->
+                <div class="profile-card-vertical" style="margin-top: 15px;">
+                    <div class="profile-img-frame-shimmer">
+                        <img src="groom (2).jpeg" alt="Aditya">
+                    </div>
+                    <p class="role-badge">T H E &nbsp; G R O O M</p>
+                    <h3 class="profile-name">Aditya</h3>
+                    <div class="info-frost-card">
+                        <p class="parent-prefix">Son of:</p>
+                        <p class="parent-names">Smt. Babita Ulhas Rathod</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="gold-shimmer-divider"></div>
+
+        <!-- ROYAL DARK BLUE SCRATCH SECTION -->
+        <section class="scratch-section">
+            <div class="scratch-border-banner">
+                <div class="banner-line"></div>
+                <div class="banner-emblem">
+                    <span>ॐ</span>
+                </div>
+                <div class="banner-line"></div>
+            </div>
+
+            <div class="scratch-content-wrapper">
+                <p class="scratch-exclusive">AN EXCLUSIVE INVITATION</p>
+                <h2 class="section-title shimmer-text" style="font-size: 2.2rem; margin-bottom: 5px;">Scratch To Reveal</h2>
+                <p class="scratch-subtitle">Rub to unlock our celebration</p>
+                
+                <div class="scratch-circle-container" id="scratch-container">
+                    <div class="scratch-hidden-content">
+                        <div class="reveal-om">ॐ</div>
+                        <h3>Our Forever Begins</h3>
+                        <p class="reveal-date">31 Dec 2026 &amp; 1 Jan 2027</p>
+                        <p class="reveal-venue">Signature Resort, Nagpur</p>
+                    </div>
+                    <canvas id="scratch-canvas" width="260" height="260"></canvas>
+                </div>
+            </div>
+
+            <div class="scratch-border-banner bottom-banner">
+                <div class="banner-line"></div>
+                <div class="banner-emblem">
+                    <span>ॐ</span>
+                </div>
+                <div class="banner-line"></div>
+            </div>
+        </section>
+
+        <div class="gold-shimmer-divider"></div>
+
+        <!-- BOTANICAL QUOTE BANNER (bg14.jpg) -->
+        <section class="quote-block">
+            <div class="quote-glass-frame">
+                <span class="quote-flourish">❧ ✦ ☙</span>
+                <p class="quote-text">"True love stories never have endings, but they surely have magical beginnings celebrated with those we cherish most."</p>
+                <div class="quote-mini-divider"></div>
+                <p class="quote-author">CELEBRATION OF LOVE</p>
+            </div>
+        </section>
+
+        <div class="gold-shimmer-divider"></div>
+
+        <!-- EVENTS & ITINERARY CARDS (bg14.jpg) -->
+        <section class="itinerary-section">
+            <h2 class="section-title shimmer-text">Wedding Itinerary</h2>
+            <div class="gold-divider"></div>
+
+            <div class="itinerary-card">
+                <h3 class="itinerary-title shimmer-text">1. Haldi</h3>
+                <div class="itinerary-detail-content">
+                    <p><strong>Date:</strong> Thursday, Dec 31, 2026</p>
+                    <p><strong>Time:</strong> 1:00 PM onwards</p>
+                    <p><strong>Venue:</strong> Signature Resort, Nagpur</p>
+                </div>
+            </div>
+
+            <div class="itinerary-card">
+                <h3 class="itinerary-title shimmer-text">2. Sangeet</h3>
+                <div class="itinerary-detail-content">
+                    <p><strong>Date:</strong> Thursday, Dec 31, 2026</p>
+                    <p><strong>Time:</strong> 6:00 PM onwards</p>
+                    <p><strong>Venue:</strong> Signature Resort, Nagpur</p>
+                </div>
+            </div>
+
+            <div class="itinerary-card">
+                <h3 class="itinerary-title shimmer-text">3. Baraat</h3>
+                <div class="itinerary-detail-content">
+                    <p><strong>Date:</strong> Friday, Jan 1, 2027</p>
+                    <p><strong>Time:</strong> 8:00 AM onwards</p>
+                    <p><strong>Venue:</strong> Signature Resort, Nagpur</p>
+                </div>
+            </div>
+
+            <div class="itinerary-card">
+                <h3 class="itinerary-title shimmer-text">4. Muhurtham</h3>
+                <div class="itinerary-detail-content">
+                    <p><strong>Date:</strong> Friday, Jan 1, 2027</p>
+                    <p><strong>Time:</strong> 10:54 AM onwards</p>
+                    <p><strong>Venue:</strong> Signature Resort, Nagpur</p>
+                    <div class="card-action-buttons">
+                        <a href="https://maps.google.com/?q=Signature+Resort+Nagpur" target="_blank" class="map-btn">Get Directions</a>
+                        <button class="calendar-btn" onclick="addToCalendar()">Add to Calendar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="gold-shimmer-divider"></div>
+
+        <!-- FOOTER & HOSTS SECTION (footer-bg.jpg) -->
+        <section class="footer-section">
+            <h2 class="blessings-text">Invited By</h2>
+            <p class="family-credits" style="line-height: 1.8;">
+                <strong>Smt. Babita Ulhas Rathod</strong><br>
+                Mrs. Aruna &amp; Mr. Anil Ram Prasad<br>
+                Mrs. Sneha &amp; Mr. Ankit Ulhas Rathod
+            </p>
+            <h3 class="blessings-sub shimmer-text" style="margin-top: 25px;">Come Bless Our Beginning</h3>
+            <p class="family-credits">
+                Your presence and blessings mean the world to us<br> as Aditya and Kritika embark on their<br> lifelong journey together
+            </p>
+            <p class="footer-couple">With all our love,<br><strong>Aditya &amp; Kritika</strong></p>
+            <p class="footer-brand">Signature Resort • Nagpur</p>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

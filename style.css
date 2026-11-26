@@ -1,0 +1,889 @@
+:root {
+    --gold-primary: #dfb13c;
+    --gold-light: #f5d76c;
+    --champagne: #fff1b0;
+    --royal-blue: #0b192c;
+    --royal-blue-deep: #07101a;
+    --text-light: #fdfaf3;
+    --off-white: #faf7f0;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--royal-blue-deep);
+    color: var(--text-light);
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+/* --- ANIMATED GOLDEN TEXT SHIMMER --- */
+.shimmer-text {
+    background: linear-gradient(90deg, #dfb13c 0%, #fff6cc 45%, #f5d76c 55%, #dfb13c 100%);
+    background-size: 200% auto;
+    color: #f5d76c;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textShimmer 3.5s linear infinite;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.85));
+}
+
+@keyframes textShimmer {
+    0% { background-position: 200% center; }
+    100% { background-position: -200% center; }
+}
+
+/* --- SHIMMER GOLDEN GRADIENT SECTION DIVIDER --- */
+.gold-shimmer-divider {
+    height: 3px;
+    width: 100%;
+    background: linear-gradient(90deg, transparent, var(--gold-primary), var(--champagne), var(--gold-primary), transparent);
+    background-size: 200% 100%;
+    animation: goldShimmer 4s infinite linear;
+    position: relative;
+    z-index: 3;
+    box-shadow: 0 0 12px rgba(223, 177, 60, 0.6);
+}
+
+@keyframes goldShimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* --- 3D SYMMETRICAL 4-FOLD OUTWARD UNFOLDING ENVELOPE (sealbg.jpg) --- */
+#envelope-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--royal-blue-deep);
+    overflow: hidden;
+    perspective: 1800px;
+    transition: visibility 0.5s;
+}
+
+.envelope-flap {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('sealbg.jpg');
+    background-size: cover;
+    background-position: center;
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.75);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    will-change: transform, opacity;
+}
+
+/* Exact 4-quadrant diagonal meeting at (50%, 50%) */
+.flap-top {
+    transform-origin: 50% 0%;
+    clip-path: polygon(0% 0%, 100% 0%, 50% 50%);
+}
+
+.flap-bottom {
+    transform-origin: 50% 100%;
+    clip-path: polygon(0% 100%, 100% 100%, 50% 50%);
+}
+
+.flap-left {
+    transform-origin: 0% 50%;
+    clip-path: polygon(0% 0%, 0% 100%, 50% 50%);
+}
+
+.flap-right {
+    transform-origin: 100% 50%;
+    clip-path: polygon(100% 0%, 100% 100%, 50% 50%);
+}
+
+.wax-seal {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, #fff1b0 0%, #f5d76c 60%, #dfb13c 100%);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.9), inset 0 2px 6px rgba(255,255,255,0.8);
+    cursor: pointer;
+    z-index: 10000;
+    animation: sealPulse 2s infinite ease-in-out;
+    border: 2px solid #fff1b0;
+}
+
+.seal-symbol {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    color: var(--royal-blue);
+    font-weight: 700;
+    line-height: 1;
+}
+
+.seal-text {
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 2px;
+    color: var(--royal-blue);
+    font-weight: 700;
+    margin-top: 4px;
+}
+
+@keyframes sealPulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(223,177,60,0.6); }
+    50% { transform: scale(1.06); box-shadow: 0 0 30px rgba(255,241,176,0.9); }
+}
+
+/* --- CANVAS STARDUST BACKGROUND (Smooth Interactive Touch Active) --- */
+#stardust-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh;
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* --- MAIN CONTAINER --- */
+.invitation-container {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--royal-blue);
+    box-shadow: 0 0 60px rgba(0,0,0,0.95);
+    text-align: center;
+}
+
+/* --- HERO WELCOME SECTION (arch-bg.jpg) --- */
+.hero-section {
+    position: relative;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 40px 20px 30px 20px;
+    background-image: url('arch-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(7, 16, 26, 0.2);
+    z-index: 0;
+}
+
+.hero-section > * {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-top-lights {
+    font-size: 1.3rem;
+    color: var(--champagne);
+    letter-spacing: 6px;
+    margin-top: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+.hero-text-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto 0;
+    width: 100%;
+}
+
+.hero-gratitude {
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    letter-spacing: 3px;
+    color: #0b192c;
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+}
+
+.hero-names-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.couple-name-line {
+    font-family: 'Alex Brush', cursive;
+    font-size: clamp(3rem, 11vw, 4.4rem);
+    color: #0b192c;
+    line-height: 1.05;
+    text-shadow: 0 0 16px rgba(255, 255, 255, 0.95), 0 0 30px rgba(223, 177, 60, 0.6);
+    font-weight: 700;
+}
+
+.couple-ampersand {
+    font-family: 'Alex Brush', cursive;
+    font-size: clamp(1.8rem, 7vw, 2.4rem);
+    color: #dfb13c;
+    line-height: 0.85;
+    margin: -2px 0;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+}
+
+.hero-invite-sub {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 0.92rem;
+    color: #0b192c;
+    line-height: 1.5;
+    margin: 8px 0;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+}
+
+.hero-gold-separator {
+    width: 160px;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+    margin: 8px auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.separator-dot {
+    width: 5px;
+    height: 5px;
+    background-color: var(--gold-primary);
+    transform: rotate(45deg);
+    box-shadow: 0 0 6px rgba(223,177,60,0.8);
+}
+
+.hero-event-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: #0b192c;
+    margin: 4px 0;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.95);
+}
+
+.hero-datetime {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #0b192c;
+    line-height: 1.6;
+    margin-top: 8px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+}
+
+.scroll-indicator-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Off-White Scroll to Celebrate Pill */
+.scroll-indicator {
+    background: var(--off-white);
+    border: 1.5px solid rgba(223, 177, 60, 0.75);
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    color: #dfb13c;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    animation: bounce 2s infinite;
+    box-shadow: 0 8px 24px rgba(11, 25, 44, 0.25);
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-6px); }
+    60% { transform: translateY(-3px); }
+}
+
+/* --- COUPLE STORY SECTION (bg8.jpg) --- */
+/* --- COUPLE STORY SECTION COUPLE PHOTO FRAME --- */
+.story-couple-photo-frame {
+    width: 200px;  /* Increased width (was 140px) */
+    height: 200px; /* Increased height (was 140px) */
+    margin: 0 auto 20px auto;
+    border-radius: 50%; /* Keep 50% for circular or change to 18px for soft-edged rectangle */
+    padding: 4px;
+    position: relative;
+    background: linear-gradient(135deg, #dfb13c, #fff1b0, #f5d76c, #dfb13c);
+    background-size: 300% 300%;
+    animation: shimmerBorder 4s infinite linear;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.7), 0 0 20px rgba(223,177,60,0.5);
+}
+
+.story-couple-photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%; /* Matches container shape */
+    display: block;
+}
+
+.content-section {
+    padding: 60px 24px;
+    text-align: center;
+    position: relative;
+}
+
+.story-bg {
+    background-image: url('bg8.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.content-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(7, 16, 26, 0.45);
+    z-index: 0;
+}
+
+.content-section > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* --- BRIDE & GROOM PROFILES SECTION (bg13.jpg) - Soft-Edged Rectangular Frames --- */
+.vibrant-couple-bg {
+    background-image: url('bg13.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.vibrant-couple-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(11, 25, 44, 0.25);
+    z-index: 0;
+}
+
+.section-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.2rem, 5vw, 1.8rem);
+    letter-spacing: 3px;
+    white-space: nowrap !important;
+    margin-bottom: 10px;
+}
+
+.story-prose {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #fdfaf3;
+    max-width: 360px;
+    margin: 0 auto;
+    text-align: center;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.9);
+}
+
+.gold-divider {
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+    margin: 20px auto 30px auto;
+}
+
+.profiles-vertical-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.profile-card-vertical {
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+}
+
+/* Soft-edged rectangular frame with golden shimmer border */
+.profile-img-frame-shimmer {
+    width: 165px;
+    height: 215px;
+    margin: 0 auto 12px auto;
+    border-radius: 18px;
+    padding: 4px;
+    position: relative;
+    background: linear-gradient(135deg, #dfb13c, #fff1b0, #f5d76c, #dfb13c);
+    background-size: 300% 300%;
+    animation: shimmerBorder 4s infinite linear;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.65), 0 0 20px rgba(223,177,60,0.5);
+}
+
+@keyframes shimmerBorder {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.profile-img-frame-shimmer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 14px;
+    display: block;
+}
+
+.role-badge {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 3px;
+    color: var(--gold-primary);
+    margin-bottom: 4px;
+    font-weight: 700;
+}
+
+.profile-name {
+    font-family: 'Alex Brush', cursive;
+    font-size: 2.6rem;
+    color: #0b192c;
+    margin-bottom: 12px;
+    line-height: 1.1;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.95), 0 0 20px rgba(223, 177, 60, 0.5);
+    font-weight: 700;
+}
+
+.info-frost-card {
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(223, 177, 60, 0.5);
+    border-radius: 12px;
+    padding: 14px 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    max-width: 270px;
+    margin: 0 auto;
+}
+
+.parent-prefix {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 0.82rem;
+    color: #b8891e;
+    margin-bottom: 3px;
+}
+
+.parent-names {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    color: #0b192c;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+/* --- ROYAL DARK BLUE SCRATCH SECTION --- */
+.scratch-section {
+    padding: 40px 0 50px 0;
+    background: radial-gradient(circle, #0f233c 0%, #07101a 100%);
+    text-align: center;
+    position: relative;
+}
+
+.scratch-border-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0 20px;
+    margin: 15px 0;
+}
+
+.banner-line {
+    flex-grow: 1;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, var(--gold-primary), var(--champagne), var(--gold-primary), transparent);
+    box-shadow: 0 0 8px rgba(223,177,60,0.6);
+}
+
+.banner-emblem {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff1b0 0%, #f5d76c 60%, #dfb13c 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 12px;
+    border: 1.5px solid #0b192c;
+    box-shadow: 0 0 15px rgba(223,177,60,0.8);
+}
+
+.banner-emblem span {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    color: #0b192c;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.scratch-content-wrapper {
+    padding: 10px 24px;
+}
+
+.scratch-exclusive {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 3px;
+    color: #bfa175;
+    margin-bottom: 6px;
+}
+
+.scratch-subtitle {
+    font-size: 0.82rem;
+    color: #dcd6cd;
+    margin-bottom: 25px;
+    font-style: italic;
+}
+
+.scratch-circle-container {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    margin: 0 auto;
+    background: radial-gradient(circle, #122842 0%, #07101a 100%);
+    border: 3px solid var(--gold-primary);
+    border-radius: 50%;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.8), 0 0 25px rgba(223,177,60,0.4);
+    overflow: hidden;
+    transition: box-shadow 1.2s ease;
+}
+
+.scratch-circle-container.burst-glow {
+    box-shadow: 0 0 45px rgba(255, 241, 176, 0.9), 0 0 80px rgba(223, 177, 60, 0.7);
+}
+
+.scratch-hidden-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    text-align: center;
+}
+
+.reveal-om {
+    font-size: 2.3rem;
+    color: var(--gold-light);
+    margin-bottom: 4px;
+    text-shadow: 0 0 14px rgba(223,177,60,0.9);
+}
+
+.scratch-hidden-content h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    color: var(--champagne);
+    margin-bottom: 6px;
+}
+
+.reveal-date {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    color: var(--text-light);
+    margin-bottom: 4px;
+}
+
+.reveal-venue {
+    font-size: 0.82rem;
+    color: #f3e5ab;
+    line-height: 1.4;
+}
+
+#scratch-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    cursor: crosshair;
+    touch-action: none;
+}
+
+/* --- AESTHETIC BOTANICAL QUOTE BANNER (bg14.jpg) --- */
+.quote-block {
+    background-image: url('bg9.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 55px 24px;
+    text-align: center;
+    position: relative;
+}
+
+.quote-block::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(245, 249, 255, 0.25);
+    z-index: 0;
+}
+
+.quote-glass-frame {
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1.5px solid rgba(223, 177, 60, 0.7);
+    border-radius: 18px;
+    padding: 32px 22px;
+    box-shadow: 0 12px 35px rgba(11, 25, 44, 0.18), inset 0 0 20px rgba(223, 177, 60, 0.15);
+}
+
+.quote-flourish {
+    display: block;
+    font-size: 1.1rem;
+    color: #b8891e;
+    letter-spacing: 4px;
+    margin-bottom: 12px;
+}
+
+.quote-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.12rem;
+    color: #0b192c;
+    font-weight: 600;
+    line-height: 1.65;
+    margin-bottom: 16px;
+}
+
+.quote-mini-divider {
+    width: 70px;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, #b8891e, transparent);
+    margin: 0 auto 12px auto;
+}
+
+.quote-author {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #163358;
+}
+
+/* --- ITINERARY CARDS (bg14.jpg) --- */
+.itinerary-section {
+    padding: 60px 24px;
+    background-image: url('bg4.jpg');
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    position: relative;
+}
+
+.itinerary-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(7, 16, 26, 0.62);
+    z-index: 0;
+}
+
+.itinerary-section > * {
+    position: relative;
+    z-index: 1;
+}
+
+.itinerary-card {
+    position: relative;
+    background: linear-gradient(145deg, rgba(11, 25, 44, 0.94), rgba(18, 38, 66, 0.94));
+    border-radius: 14px;
+    padding: 24px 20px;
+    margin-bottom: 18px;
+    text-align: center;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65);
+    border: 1.5px solid transparent;
+    background-clip: padding-box;
+}
+
+.itinerary-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    padding: 2px;
+    background: linear-gradient(120deg, #dfb13c, #fff4bd, #b8891e, #fff4bd, #dfb13c);
+    background-size: 300% 300%;
+    animation: borderShimmer 4s linear infinite;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+@keyframes borderShimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.itinerary-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.18rem;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.itinerary-detail-content {
+    text-align: center;
+    border-top: 1px solid rgba(223, 177, 60, 0.25);
+    padding-top: 12px;
+}
+
+.itinerary-detail-content p {
+    font-size: 0.92rem;
+    color: #f5efe0;
+    line-height: 1.65;
+    margin-bottom: 6px;
+    text-align: center;
+}
+
+.itinerary-detail-content strong {
+    color: var(--gold-light);
+}
+
+.card-action-buttons {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.map-btn, .calendar-btn {
+    display: inline-block;
+    background: transparent;
+    color: var(--gold-light);
+    border: 1px solid var(--gold-primary);
+    padding: 9px 20px;
+    border-radius: 50px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin: 4px;
+}
+
+.map-btn:hover, .calendar-btn:hover {
+    background: var(--gold-primary);
+    color: var(--royal-blue);
+    box-shadow: 0 0 15px rgba(223,177,60,0.6);
+}
+
+/* --- FOOTER & HOSTS SECTION (footer-bg.jpg) --- */
+.footer-section {
+    padding: 60px 24px;
+    text-align: center;
+    background-image: url('footer-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.footer-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(7, 16, 26, 0.65);
+    z-index: 0;
+}
+
+.footer-section > * {
+    position: relative;
+    z-index: 1;
+}
+
+.blessings-text {
+    font-family: 'Alex Brush', serif;
+    font-size: 2.5rem;
+    color: var(--champagne);
+    margin-bottom: 15px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+.blessings-sub {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.family-credits {
+    font-size: 0.92rem;
+    color: #ebdcb7;
+    line-height: 1.7;
+    margin-bottom: 25px;
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    text-align: center;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+}
+
+.footer-couple {
+    font-family: 'Alex Brush', cursive;
+    font-size: 2rem;
+    color: var(--champagne);
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.footer-brand {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-top: 10px;
+}
